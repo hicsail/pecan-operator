@@ -40,5 +40,6 @@ Create a new API
 operator-sdk create api --group pecan --version v1 --kind Pecan --generate-role
 ```
 
-Create a new Role
+Create new tasks for the operator
+In roles/pecan/tasks/main.yml add:
 ```

@@ -1,2 +1,17 @@
 ---
 # tasks file for Pecan
+- name: Add ncsa chart repo
+  kubernetes.core.helm_repository:
+    name: ncsa
+    repo_url: https://opensource.ncsa.illinois.edu/charts/
+- name: Add bitnami chart repo
+  kubernetes.core.helm_repository:
+    name: bitnami
+    repo_url: https://raw.githubusercontent.com/bitnami/charts/pre-2022/bitnami
+- name: Install FIWARE Marinera mongodb helm chart
+  kubernetes.core.helm:
+    name: bitnami
+    chart_ref: ncsa
+    chart_version: 0.6.2
+    release_namespace: "{{ ansible_operator_meta.namespace }}"
+    release_state: present
