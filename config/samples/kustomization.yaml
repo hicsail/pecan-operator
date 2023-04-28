@@ -1,0 +1,4 @@
+## Append samples of your project ##
+resources:
+- pecan_v1_pecan.yaml
+#+kubebuilder:scaffold:manifestskustomizesamples

@@ -1,0 +1,27 @@
+# permissions for end users to view pecans.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: pecan-viewer-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: pecan-operator
+    app.kubernetes.io/part-of: pecan-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: pecan-viewer-role
+rules:
+- apiGroups:
+  - pecan.sail.codes
+  resources:
+  - pecans
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - pecan.sail.codes
+  resources:
+  - pecans/status
+  verbs:
+  - get

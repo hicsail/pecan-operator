@@ -1,0 +1,31 @@
+# permissions for end users to edit pecans.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: pecan-editor-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: pecan-operator
+    app.kubernetes.io/part-of: pecan-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: pecan-editor-role
+rules:
+- apiGroups:
+  - pecan.sail.codes
+  resources:
+  - pecans
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - pecan.sail.codes
+  resources:
+  - pecans/status
+  verbs:
+  - get

@@ -1,0 +1,12 @@
+apiVersion: pecan.sail.codes/v1
+kind: Pecan
+metadata:
+  labels:
+    app.kubernetes.io/name: pecan
+    app.kubernetes.io/instance: pecan-sample
+    app.kubernetes.io/part-of: pecan-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: pecan-operator
+  name: pecan-sample
+spec:
+  # TODO(user): Add fields here

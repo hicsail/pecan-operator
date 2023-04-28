@@ -37,4 +37,21 @@ rules:
       - patch
       - update
       - watch
+  ##
+  ## Rules for pecan.sail.codes/v1, Kind: Pecan
+  ##
+  - apiGroups:
+      - pecan.sail.codes
+    resources:
+      - pecans
+      - pecans/status
+      - pecans/finalizers
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
 #+kubebuilder:scaffold:rules

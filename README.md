@@ -33,3 +33,12 @@ pip install ansible
 Create a new Operator
 ```
 operator-sdk init --plugins=ansible --domain sail.codes
+```
+
+Create a new API
+```
+operator-sdk create api --group pecan --version v1 --kind Pecan --generate-role
+```
+
+Create a new Role
+```
