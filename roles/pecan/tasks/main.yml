@@ -8,10 +8,19 @@
   kubernetes.core.helm_repository:
     name: bitnami
     repo_url: https://raw.githubusercontent.com/bitnami/charts/pre-2022/bitnami
-- name: Install FIWARE Marinera mongodb helm chart
-  kubernetes.core.helm:
-    name: bitnami
-    chart_ref: ncsa
-    chart_version: 0.6.2
-    release_namespace: "{{ ansible_operator_meta.namespace }}"
-    release_state: present
+- name: Install postgresql service
+  k8s:
+    state: present
+    kind: Service
+    api_version: v1
+    name: pecan-postgresql
+    namespace: "{{ ansible_operator_meta.namespace }}"
+    definition: "{{ lookup('template', 'service-pecan-postgres.yml') }}"
+#
+#- name: Add Pecan
+#  kubernetes.core.helm:
+#    name: pecan
+#    chart_ref: ncsa/pecan
+#    chart_version: 0.6.2
+#    release_namespace: "{{ ansible_operator_meta.namespace }}"
+#    release_state: present

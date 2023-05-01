@@ -1,0 +1,20 @@
+---
+# Source: pecan/charts/betydb/charts/postgresql/templates/svc.yaml
+metadata:
+  labels:
+    app: postgresql
+    chart: postgresql-8.9.9
+    release: "pecan"
+    heritage: "Helm"
+  annotations:
+spec:
+  type: ClusterIP
+  ports:
+    - name: tcp-postgresql
+      port: 5432
+      targetPort: tcp-postgresql
+  selector:
+    app: postgresql
+    release: "pecan"
+    role: master
+

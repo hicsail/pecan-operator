@@ -1,0 +1,10 @@
+---
+- name: Install a Pecan resource to OpenShift
+  hosts: localhost
+  connection: local
+  roles:
+    - pecan
+  vars:
+    ansible_operator_meta:
+      name: pecan
+      namespace: software-application-innovation-lab-sail-projects-fcd6dfa

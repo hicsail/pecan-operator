@@ -1,0 +1,3 @@
+FROM nginx:latest
+
+COPY /pecan-chart.ymal /usr/share/nginx/html
