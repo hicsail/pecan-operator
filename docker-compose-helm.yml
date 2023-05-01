@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  chart:
+    image: hicsail/pecan-helm-chart:main
+    ports:
+      - 3010:80
+    restart: always
