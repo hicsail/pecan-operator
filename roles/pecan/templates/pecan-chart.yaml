@@ -1,18 +1,4 @@
 ---
-# Source: pecan/charts/rabbitmq/templates/serviceaccount.yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: pecan-rabbitmq
-  namespace: software-application-innovation-lab-sail-projects-fcd6dfa
-  labels:
-    app: rabbitmq
-    chart: rabbitmq-6.28.1
-    release: "pecan"
-    heritage: "Helm"
-secrets:
-  - name: "pecan-rabbitmq"
----
 # Source: pecan/charts/betydb/charts/postgresql/templates/secrets.yaml
 apiVersion: v1
 kind: Secret
@@ -56,10 +42,10 @@ metadata:
     heritage: "Helm"
 type: Opaque
 data:
-  
+
   rabbitmq-password: "Z3Vlc3Q="
-  
-  
+
+
   rabbitmq-erlang-cookie: "MTIzNHRoaXNpc2FzdXBlcnNlY3JldG9mbGVuZ3RoMzI="
 ---
 # Source: pecan/charts/rabbitmq/templates/configuration.yaml
@@ -672,7 +658,7 @@ spec:
           image: "ncsa/checks:1.0.1"
           imagePullPolicy: IfNotPresent
           env:
-            
+
             - name: RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:

@@ -1,3 +1,0 @@
-FROM nginx:latest
-
-COPY pecan-chart.yaml /usr/share/nginx/html/charts/index.yaml
