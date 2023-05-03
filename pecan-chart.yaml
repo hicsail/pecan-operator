@@ -190,44 +190,6 @@ spec:
     requests:
       storage: "20Gi"
 ---
-# Source: pecan/charts/rabbitmq/templates/role.yaml
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: pecan-rabbitmq-endpoint-reader
-  namespace: software-application-innovation-lab-sail-projects-fcd6dfa
-  labels:
-    app: rabbitmq
-    chart: rabbitmq-6.28.1
-    release: "pecan"
-    heritage: "Helm"
-rules:
-  - apiGroups: [""]
-    resources: ["endpoints"]
-    verbs: ["get"]
-  - apiGroups: [""]
-    resources: ["events"]
-    verbs: ["create"]
----
-# Source: pecan/charts/rabbitmq/templates/rolebinding.yaml
-kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: pecan-rabbitmq-endpoint-reader
-  namespace: software-application-innovation-lab-sail-projects-fcd6dfa
-  labels:
-    app: rabbitmq
-    chart: rabbitmq-6.28.1
-    release: "pecan"
-    heritage: "Helm"
-subjects:
-- kind: ServiceAccount
-  name: pecan-rabbitmq
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: pecan-rabbitmq-endpoint-reader
----
 # Source: pecan/charts/betydb/charts/postgresql/templates/svc-headless.yaml
 apiVersion: v1
 kind: Service
@@ -726,7 +688,7 @@ spec:
             - name: data
               mountPath: /data
           env:
-            
+
             - name: RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -767,7 +729,7 @@ spec:
           image: "ncsa/checks:1.0.1"
           imagePullPolicy: IfNotPresent
           env:
-            
+
             - name: RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -783,7 +745,7 @@ spec:
             - name: data
               mountPath: /data
           env:
-            
+
             - name: RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -824,7 +786,7 @@ spec:
           image: "ncsa/checks:1.0.1"
           imagePullPolicy: IfNotPresent
           env:
-            
+
             - name: RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -840,7 +802,7 @@ spec:
             - name: data
               mountPath: /data
           env:
-            
+
             - name: RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -881,7 +843,7 @@ spec:
           image: "ncsa/checks:1.0.1"
           imagePullPolicy: IfNotPresent
           env:
-            
+
             - name: RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -897,7 +859,7 @@ spec:
             - name: data
               mountPath: /data
           env:
-            
+
             - name: RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -938,7 +900,7 @@ spec:
           image: "ncsa/checks:1.0.1"
           imagePullPolicy: IfNotPresent
           env:
-            
+
             - name: RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -954,7 +916,7 @@ spec:
             - name: data
               mountPath: /data
           env:
-            
+
             - name: RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -979,7 +941,7 @@ metadata:
     app.kubernetes.io/version: "1.7.2"
     app.kubernetes.io/managed-by: Helm
 spec:
-  replicas: 
+  replicas:
   selector:
     matchLabels:
       app.kubernetes.io/name: pecan-monitor
@@ -1243,7 +1205,7 @@ spec:
         release: "pecan"
         heritage: "Helm"
         role: master
-    spec:      
+    spec:
       securityContext:
         fsGroup: 1001
       containers:
@@ -1307,7 +1269,7 @@ spec:
               mountPath: /dev/shm
             - name: data
               mountPath: /bitnami/postgresql
-              subPath: 
+              subPath:
       volumes:
         - name: dshm
           emptyDir:
@@ -1352,7 +1314,7 @@ spec:
         chart: rabbitmq-6.28.1
       annotations:
         checksum/secret: 65f53b368920023ee7717bc24218d78d429ff69c2078b1e2ba0ebc08b7982bc9
-    spec:      
+    spec:
       serviceAccountName: pecan-rabbitmq
       terminationGracePeriodSeconds: 10
       containers:
