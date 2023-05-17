@@ -27,6 +27,7 @@ metadata:
 type: Opaque
 data:
   betyPassword:  "YmV0eQ=="
+  postgresqlPassword: c3VwZXJzZWNyZXQ=
   secretKey:  "dGhpc2lzbm90YXNlY3JldA=="
 ---
 # Source: pecan/charts/rabbitmq/templates/secrets.yaml
@@ -175,6 +176,7 @@ spec:
   resources:
     requests:
       storage: "20Gi"
+  volumeMode: Filesystem
 ---
 # Source: pecan/charts/betydb/charts/postgresql/templates/svc-headless.yaml
 apiVersion: v1
@@ -1192,8 +1194,6 @@ spec:
         heritage: "Helm"
         role: master
     spec:
-      securityContext:
-        fsGroup: 1001
       containers:
         - name: pecan-postgresql
           image: docker.io/bitnami/postgresql:11.8.0-debian-10-r4
@@ -1202,8 +1202,6 @@ spec:
             requests:
               cpu: 250m
               memory: 256Mi
-          securityContext:
-            runAsUser: 1001
           env:
             - name: BITNAMI_DEBUG
               value: "false"
@@ -1407,9 +1405,6 @@ spec:
                 secretKeyRef:
                   name: pecan-rabbitmq
                   key: rabbitmq-password
-      securityContext:
-        fsGroup: 1001
-        runAsUser: 1001
       volumes:
         - name: config-volume
           configMap:
