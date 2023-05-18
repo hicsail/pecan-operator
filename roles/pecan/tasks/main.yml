@@ -24,6 +24,22 @@
     name: pecan-rabbitmq
     namespace: "{{ ansible_operator_meta.namespace }}"
     definition: "{{ lookup('template', 'service-account-pecan-rabbitmq.yml') }}"
+- name: Install postgres service account
+  k8s:
+    state: present
+    kind: ServiceAccount
+    api_version: v1
+    name: pecan-rabbitmq
+    namespace: "{{ ansible_operator_meta.namespace }}"
+    definition: "{{ lookup('template', 'service-account-pecan-postgresql.yml') }}"
+- name: Install betydb service account
+  k8s:
+    state: present
+    kind: ServiceAccount
+    api_version: v1
+    name: pecan-rabbitmq
+    namespace: "{{ ansible_operator_meta.namespace }}"
+    definition: "{{ lookup('template', 'service-account-pecan-betydb.yml') }}"
 - name: Install pecan
   k8s:
     state: present

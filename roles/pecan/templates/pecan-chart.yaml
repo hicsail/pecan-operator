@@ -175,6 +175,7 @@ spec:
   resources:
     requests:
       storage: "20Gi"
+  volumeMode: Block
 ---
 # Source: pecan/charts/betydb/charts/postgresql/templates/svc-headless.yaml
 apiVersion: v1
@@ -394,6 +395,7 @@ spec:
         app.kubernetes.io/name: betydb
         app.kubernetes.io/instance: pecan
     spec:
+      serviceAccountName: pecan-betydb
       initContainers:
         - name: check-postgresql
           image: "ncsa/checks:1.0.1"
@@ -1192,8 +1194,7 @@ spec:
         heritage: "Helm"
         role: master
     spec:
-      securityContext:
-        fsGroup: 1001
+      serviceAccountName: pecan-postgresql
       containers:
         - name: pecan-postgresql
           image: docker.io/bitnami/postgresql:11.8.0-debian-10-r4
@@ -1202,8 +1203,6 @@ spec:
             requests:
               cpu: 250m
               memory: 256Mi
-          securityContext:
-            runAsUser: 1001
           env:
             - name: BITNAMI_DEBUG
               value: "false"
@@ -1407,9 +1406,6 @@ spec:
                 secretKeyRef:
                   name: pecan-rabbitmq
                   key: rabbitmq-password
-      securityContext:
-        fsGroup: 1001
-        runAsUser: 1001
       volumes:
         - name: config-volume
           configMap:
