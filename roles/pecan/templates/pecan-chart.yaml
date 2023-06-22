@@ -27,6 +27,7 @@ metadata:
 type: Opaque
 data:
   betyPassword:  "YmV0eQ=="
+  postgresqlPassword: c3VwZXJzZWNyZXQ=
   secretKey:  "dGhpc2lzbm90YXNlY3JldA=="
 ---
 # Source: pecan/charts/rabbitmq/templates/secrets.yaml
