@@ -27,6 +27,7 @@ metadata:
 type: Opaque
 data:
   betyPassword:  "YmV0eQ=="
+  postgresqlPassword: c3VwZXJzZWNyZXQ=
   secretKey:  "dGhpc2lzbm90YXNlY3JldA=="
 ---
 # Source: pecan/charts/rabbitmq/templates/secrets.yaml
@@ -171,11 +172,11 @@ metadata:
     app.kubernetes.io/managed-by: Helm
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: "20Gi"
-  volumeMode: Block
+  volumeMode: Filesystem
 ---
 # Source: pecan/charts/betydb/charts/postgresql/templates/svc-headless.yaml
 apiVersion: v1
@@ -541,6 +542,7 @@ spec:
         app.kubernetes.io/name: pecan-executor
         app.kubernetes.io/instance: pecan
     spec:
+      nodeName: wrk-21
       initContainers:
         - name: check-rabbitmq
           image: "ncsa/checks:1.0.1"
@@ -655,6 +657,7 @@ spec:
         app.kubernetes.io/name: pecan-model-biocro-0-95
         app.kubernetes.io/instance: pecan
     spec:
+      nodeName: wrk-21
       initContainers:
         - name: check-rabbitmq
           image: "ncsa/checks:1.0.1"
@@ -712,6 +715,7 @@ spec:
         app.kubernetes.io/name: pecan-model-ed2-2-2-0
         app.kubernetes.io/instance: pecan
     spec:
+      nodeName: wrk-21
       initContainers:
         - name: check-rabbitmq
           image: "ncsa/checks:1.0.1"
@@ -769,6 +773,7 @@ spec:
         app.kubernetes.io/name: pecan-model-maespa-git
         app.kubernetes.io/instance: pecan
     spec:
+      nodeName: wrk-21
       initContainers:
         - name: check-rabbitmq
           image: "ncsa/checks:1.0.1"
@@ -826,6 +831,7 @@ spec:
         app.kubernetes.io/name: pecan-model-sipnet-136
         app.kubernetes.io/instance: pecan
     spec:
+      nodeName: wrk-21
       initContainers:
         - name: check-rabbitmq
           image: "ncsa/checks:1.0.1"
@@ -883,6 +889,7 @@ spec:
         app.kubernetes.io/name: pecan-model-sipnet-git
         app.kubernetes.io/instance: pecan
     spec:
+      nodeName: wrk-21
       initContainers:
         - name: check-rabbitmq
           image: "ncsa/checks:1.0.1"
@@ -1055,6 +1062,7 @@ spec:
         app.kubernetes.io/name: pecan-web
         app.kubernetes.io/instance: pecan
     spec:
+      nodeName: wrk-21
       initContainers:
         - name: check-rabbitmq
           image: "ncsa/checks:1.0.1"
@@ -1195,6 +1203,10 @@ spec:
         role: master
     spec:
       serviceAccountName: pecan-postgresql
+      securityContext:
+        runAsUser: 1001
+        runAsNonRoot: true
+        fsGroup: 1001
       containers:
         - name: pecan-postgresql
           image: docker.io/bitnami/postgresql:11.8.0-debian-10-r4
@@ -1300,6 +1312,11 @@ spec:
       annotations:
         checksum/secret: 65f53b368920023ee7717bc24218d78d429ff69c2078b1e2ba0ebc08b7982bc9
     spec:
+      nodeName: wrk-7
+      securityContext:
+        runAsUser: 1001
+        runAsNonRoot: true
+        fsGroup: 1001
       serviceAccountName: pecan-rabbitmq
       terminationGracePeriodSeconds: 10
       containers:
@@ -1459,6 +1476,7 @@ spec:
         app.kubernetes.io/name: pecan-load-data
         app.kubernetes.io/instance: pecan
     spec:
+      nodeName: wrk-21
       restartPolicy: Never
       initContainers:
         - name: check-postgresql

@@ -1,0 +1,23 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: pecan-rabbitmq-endpoint-reader
+  labels:
+    app: rabbitmq
+    app.kubernetes.io/instance: pecan-helm
+    chart: rabbitmq-6.28.1
+    heritage: Helm
+    release: pecan
+rules:
+  - verbs:
+      - get
+    apiGroups:
+      - ''
+    resources:
+      - endpoints
+  - verbs:
+      - create
+    apiGroups:
+      - ''
+    resources:
+      - events

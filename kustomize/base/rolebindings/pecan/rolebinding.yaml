@@ -1,0 +1,23 @@
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: 'system:openshift:scc:anyuid'
+  namespace: software-application-innovation-lab-sail-projects-fcd6dfa
+subjects:
+  - kind: ServiceAccount
+    name: pecan-postgresql
+    namespace: software-application-innovation-lab-sail-projects-fcd6dfa
+  - kind: ServiceAccount
+    name: pecan-betydb
+    namespace: software-application-innovation-lab-sail-projects-fcd6dfa
+  - kind: ServiceAccount
+    name: pecan-betydb-agent-injector
+    namespace: software-application-innovation-lab-sail-projects-fcd6dfa
+  - kind: ServiceAccount
+    name: pecan-rabbitmq
+    namespace: software-application-innovation-lab-sail-projects-fcd6dfa
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: 'system:openshift:scc:anyuid'
