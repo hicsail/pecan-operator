@@ -1203,6 +1203,10 @@ spec:
         role: master
     spec:
       serviceAccountName: pecan-postgresql
+      securityContext:
+        runAsUser: 1001
+        runAsNonRoot: true
+        fsGroup: 1001
       containers:
         - name: pecan-postgresql
           image: docker.io/bitnami/postgresql:11.8.0-debian-10-r4
@@ -1308,6 +1312,11 @@ spec:
       annotations:
         checksum/secret: 65f53b368920023ee7717bc24218d78d429ff69c2078b1e2ba0ebc08b7982bc9
     spec:
+      nodeName: wrk-7
+      securityContext:
+        runAsUser: 1001
+        runAsNonRoot: true
+        fsGroup: 1001
       serviceAccountName: pecan-rabbitmq
       terminationGracePeriodSeconds: 10
       containers:
