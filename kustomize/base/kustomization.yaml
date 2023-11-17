@@ -7,3 +7,6 @@ commonLabels:
 resources:
 - roles/
 - rolebindings/
+- persistentvolumeclaims/
+- deployments/
+- serviceaccounts/
